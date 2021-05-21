@@ -4,7 +4,7 @@
       y: 200,
       dx: 5,
       dy: 5,
-      rad: 20,
+      rad: 10,
       speed: 10,
     },
     brickObj: {
