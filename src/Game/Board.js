@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { BallMovement } from "./BallMovement";
+import WallBorder from "./util/WallBorder";
 import data from "./data";
 import "../App.css";
 
@@ -12,20 +13,10 @@ function Board() {
 
       let { ballObj } = data;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      //Handle Ball Movement
       BallMovement(ctx, ballObj);
-
-      if (
-        ballObj.y - ballObj.rad <= 0 ||
-        ballObj.y + ballObj.rad >= canvas.height
-      ) {
-        ballObj.dy *= -1;
-      }
-      if (
-        ballObj.x + ballObj.rad >= canvas.width ||
-        ballObj.x - ballObj.rad <= 0
-      ) {
-        ballObj.dx *= -1;
-      }
+      // Ball and Wall Border
+      WallBorder(ballObj, canvas);
 
       requestAnimationFrame(render);
     };
