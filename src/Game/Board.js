@@ -3,6 +3,9 @@ import { BallMovement } from "./BallMovement";
 import WallBorder from "./util/WallBorder";
 import data from "./data";
 import "../App.css";
+import Paddle from "./Paddle";
+
+let { ballObj, paddleProps } = data;
 
 function Board() {
   const canvasRef = useRef(null);
@@ -11,12 +14,13 @@ function Board() {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
 
-      let { ballObj } = data;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       //Handle Ball Movement
       BallMovement(ctx, ballObj);
       // Ball and Wall Border
       WallBorder(ballObj, canvas);
+
+      Paddle(ctx, canvas, paddleProps);
 
       requestAnimationFrame(render);
     };
@@ -24,7 +28,13 @@ function Board() {
   }, []);
 
   return (
-    <canvas id="game-canvas" ref={canvasRef} height="500" width="800px;" />
+    <canvas
+      id="game-canvas"
+      onMouseMove={(event) => (paddleProps.x = event.clientX- paddleProps.width / 2 - 10)}
+      ref={canvasRef}
+      height="500"
+      width="800px;"
+    />
   );
 }
 
