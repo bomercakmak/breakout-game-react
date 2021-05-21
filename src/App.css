@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+#game-canvas{
+  background-color:#2eabd1;
+}
