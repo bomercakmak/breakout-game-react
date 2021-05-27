@@ -1,4 +1,4 @@
-export default function PlayerInfo(ctx, player, canvas) {
+function PlayerInfo(ctx, player, canvas) {
     // Name
     ctx.font = "20px Arial";
     ctx.fillStyle = "white";
@@ -19,3 +19,5 @@ export default function PlayerInfo(ctx, player, canvas) {
     ctx.fillStyle = "white";
     ctx.fillText(`Score: ${player.score}`, canvas.width - 140, 30);
   }
+
+export default PlayerInfo;

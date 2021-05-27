@@ -10,19 +10,19 @@
     brickObj: {
       x: 0.5,
       y: 50,
-      height: 20,
+      height: 25,
       density: 2,
-      colors: ["red", "lightblue"],
+      colors: ["DarkCyan", "DarkRed"],
     },
     player: {
-      name: "Bahadir",
+      name: "Bahadir Cakmak",
       lives: 5,
       score: 0,
       level: 1,
     },
     paddleProps: {
       height: 20,
-      width: 100,
+      width: 130,
       x: 100,
       color: "orange",
     },

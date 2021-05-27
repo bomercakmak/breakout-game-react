@@ -8,6 +8,8 @@ import Brick from "./Brick";
 import BrickCollision from "./util/BrickCollision";
 import PaddleHitPosition from "./util/PaddleHitPosition";
 import PlayerInfo from "./PlayerInfo";
+import AllBroken from "./util/AllBroken";
+import ResetBall from "./util/ResetBall"
 
 let bricks = [];
 
@@ -19,10 +21,12 @@ function Board() {
     const render = () => {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
+      ctx.canvas.width  = window.innerWidth - 300;
+      ctx.canvas.height = window.innerHeight - 200;
       paddleProps.y = canvas.height - 30;
       // Assign Bricks
 
-      let newBricks = Brick(2, bricks, canvas, brickObj);
+      let newBricks = Brick(player.level, bricks, canvas, brickObj);
       if (newBricks && newBricks.length > 0) {
         bricks = newBricks;
       }
@@ -33,8 +37,21 @@ function Board() {
       bricks.map((brick) => {
         return brick.draw(ctx);
       });
+
       //Handle Ball Movement
       BallMovement(ctx, ballObj);
+
+      AllBroken(bricks,player,canvas,ballObj);
+
+      if (player.lives === 0) {
+        alert("Game Over! Press ok to restart");
+
+        player.lives = 5;
+        player.level = 1;
+        player.score = 0;
+        ResetBall(ballObj, canvas, paddleProps);
+        bricks.length = 0;
+      }
       // Ball and Wall Border
       WallBorder(ballObj, canvas, player,paddleProps);
 
@@ -70,7 +87,7 @@ function Board() {
         (paddleProps.x = event.clientX - paddleProps.width / 2 - 10)
       }
       ref={canvasRef}
-      height="500"
+      height="500px;"
       width="800px;"
     />
   );
